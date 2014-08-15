@@ -4,9 +4,11 @@ class Nextflow < Formula
   homepage "http://www.nextflow.io/"
   head "https://github.com/nextflow-io/nextflow.git"
 
-  version "0.8.3"
-  url "http://www.nextflow.io/releases/v0.8.3/nextflow"
-  sha1 "e93c2f6eb8d4ff045e6934e1753d546f68daffbf"
+  depends_on :java => "1.7"
+
+  version "0.9.0"
+  url "http://www.nextflow.io/releases/v0.9.0/nextflow"
+  sha1 "b4fde5c4fa81a080f9302c90924b8a0292252873"
 
   def install
     chmod 0755, "nextflow"
@@ -15,6 +17,6 @@ class Nextflow < Formula
   end
 
   test do
-    system "echo \"println 'hello'\" | #{bin}/nextflow -q | grep -q hello"
+    system "echo \"println 'hello'\" |#{bin}/nextflow -q run - |grep hello"
   end
 end

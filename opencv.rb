@@ -38,6 +38,8 @@ class Opencv < Formula
 
   def install
     jpeg = Formula["jpeg"]
+    py_prefix = %x(python-config --prefix).chomp
+    py_version = %x(python -c "import sys; print(sys.version)")[0..2]
 
     ENV.cxx11 if build.cxx11?
     args = std_cmake_args + %W(
