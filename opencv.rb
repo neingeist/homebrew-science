@@ -38,11 +38,9 @@ class Opencv < Formula
 
   def install
     jpeg = Formula["jpeg"]
-    py_prefix = %x(python-config --prefix).chomp
 
     ENV.cxx11 if build.cxx11?
     args = std_cmake_args + %W(
-      -DCMAKE_OSX_DEPLOYMENT_TARGET=
       -DBUILD_ZLIB=OFF
       -DBUILD_TIFF=OFF
       -DBUILD_PNG=OFF
@@ -50,9 +48,7 @@ class Opencv < Formula
       -DBUILD_JASPER=OFF
       -DBUILD_JPEG=OFF
       -DJPEG_INCLUDE_DIR=#{jpeg.opt_include}
-      -DJPEG_LIBRARY=#{jpeg.opt_lib}/libjpeg.dylib
-      -DPYTHON_LIBRARY=#{py_prefix}/Python
-      -DPYTHON_INCLUDE_DIR=#{py_prefix}/Headers
+      -DJPEG_LIBRARY=#{jpeg.opt_lib}/libjpeg.so
     )
 
     if build.without? "tests"
